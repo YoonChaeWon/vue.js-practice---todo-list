@@ -6,6 +6,8 @@ import App from './App'
 
 window.Vue = Vue;
 
+export const eventBus = new Vue();
+
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false

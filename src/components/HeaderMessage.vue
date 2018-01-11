@@ -16,7 +16,5 @@ export default {
 </script>
 
 <style>
-h3{
-    text-align: center;
-}
+
 </style>

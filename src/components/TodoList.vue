@@ -25,10 +25,21 @@
 </template>
 
 <script>
+import { eventBus } from '../main.js'
 import TodoItem from './TodoItem.vue'
 
 export default {
-    name: 'TodoList',
+    components: {
+        TodoItem
+    },
+    created() {
+        eventBus.$on('addition', function(data){
+            console.log(data[0])
+            console.log(data[1])
+            console.log(data[2])
+            console.log(data[3])
+        })
+    },
     data(){
         return{
             todos:[
@@ -41,9 +52,7 @@ export default {
             ]
         }
     },
-    components: {
-        TodoItem
-    }
+    name: 'TodoList'
 }
 
 </script>
