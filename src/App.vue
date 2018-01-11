@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <HeaderMessage></HeaderMessage>
+    <TodoList></TodoList>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import HeaderMessage from './components/HeaderMessage'
+import TodoList from './components/TodoList'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HeaderMessage,
+    TodoList
   }
 }
 </script>
@@ -21,8 +23,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
