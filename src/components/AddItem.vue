@@ -23,7 +23,7 @@
                 <label for="due"> 기한: </label>
                 <input type="date" v-model="due" id="userdue" name="userdue" value="">
             </p>
-            <button class="create" v-on:click="addTodo">Add</button>
+            <button class="create">Add</button>
     </div>
 </template>
 
@@ -41,22 +41,7 @@ export default{
     },
     methods: {
         addTodo: function(){
-            const todo = this.todo
-            const desc = this.desc
-            const importance = this.importance
-            const due = this.due
 
-            console.log(todo)
-
-            this.$router.app.$emit('create', 
-            {todo, desc, importance, due})
-            
-            console.log('after emit')
-
-            this.todo=''
-            this.desc=''
-            this.importance=''
-            this.due=''
         }
     },
     name: 'AddItem'
