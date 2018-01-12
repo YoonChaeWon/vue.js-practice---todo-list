@@ -1,11 +1,11 @@
 <template>
     <div class="item">
         <tr>
-            <td>{{ id }}</td>
-            <td>{{ todo }}</td>
-            <td>{{ desc }}</td>
-            <td>{{ importance }}</td>
-            <td>{{ due }}</td>
+            <td>{{ todo.id }}</td>
+            <td>{{ todo.todo }}</td>
+            <td>{{ todo.desc }}</td>
+            <td>{{ todo.importance }}</td>
+            <td>{{ todo.due }}</td>
         </tr>
     </div>
 </template>
@@ -13,7 +13,12 @@
 <script>
 export default{
     name: 'TodoItem',
-    props: ['id', 'todo', 'desc', 'importance', 'due']
+    props: {
+        todo: {
+            type: Object,
+            required: true
+        }
+    }
 }
 </script>
 

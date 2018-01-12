@@ -14,10 +14,7 @@
                 <TodoItem v-for="item in todos"
                         :key="item.id"
                         v-bind:id="item.id"
-                        v-bind:todo="item.todo"
-                        v-bind:desc="item.desc"
-                        v-bind:importance="item.importance"
-                        v-bind:due="item.due">
+                        :todo="item">
                 </TodoItem>
             </tr>
         </table>
