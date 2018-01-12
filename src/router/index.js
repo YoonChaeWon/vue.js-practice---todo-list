@@ -5,6 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TodoList from '@/components/TodoList'
 import AddItem from '@/components/AddItem'
+import DeleteItem from '@/components/DeleteItem'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,10 @@ export default new VueRouter({
             path: '/add-item',
             name: 'AddItem',
             component: AddItem
+        },
+        {
+            path: '/delete-item',
+            component: DeleteItem
         }
     ]
 })

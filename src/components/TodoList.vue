@@ -27,11 +27,16 @@
 import { eventBus } from '../main.js'
 import TodoItem from './TodoItem.vue'
 import AddItem from './AddItem.vue'
-
+import DeleteItem from './DeleteItem.vue'
 export default {
     components: {
         TodoItem,
         AddItem
+    },
+    created(){
+        eventBus.$on('delete-todo', function(data){
+            console.log(data)
+        })
     },
     data(){
         return {
