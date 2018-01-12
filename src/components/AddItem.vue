@@ -1,7 +1,6 @@
 <template>
     <div class="addition">
-        <h3> Todo List 작성 </h3>
-        <form>
+        <h3> Add Todo Page </h3>
             <p id="i1">
                 <label for="todo"> 할 일: </label>
                 <input id="todo" v-model="todo" placeholder="할 일을 입력하세요" >
@@ -24,8 +23,7 @@
                 <label for="due"> 기한: </label>
                 <input type="date" v-model="due" id="userdue" name="userdue" value="">
             </p>
-            <button class="create" @click="addTodo">Add</button>
-        </form>
+            <button class="create" v-on:click="addTodo">Add</button>
     </div>
 </template>
 
@@ -34,16 +32,31 @@ import { eventBus } from '../main.js'
 
 export default{
     data: function(){
-        return{
-            todo:'',
-            desc:'',
+        return {
+            todo: '',
+            desc: '',
             importance: '',
             due: ''
         }
     },
     methods: {
         addTodo: function(){
-            eventBus.$emit('addition', [this.todo, this.desc, this.importance, this.due])
+            const todo = this.todo
+            const desc = this.desc
+            const importance = this.importance
+            const due = this.due
+
+            console.log(todo)
+
+            this.$router.app.$emit('create', 
+            {todo, desc, importance, due})
+            
+            console.log('after emit')
+
+            this.todo=''
+            this.desc=''
+            this.importance=''
+            this.due=''
         }
     },
     name: 'AddItem'

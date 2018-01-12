@@ -1,11 +1,19 @@
 <template>
   <div id="app">
-    <HeaderMessage></HeaderMessage>
-    <TodoList></TodoList>
-    <router-link to="/additem">
-      <button> Add </button>
-    </router-link>
-    <router-view></router-view>
+    <div id="home">
+      <router-link to="/"> <HeaderMessage></HeaderMessage> </router-link>
+      <p>
+        <router-link to="/add-item"> <button>Add Page</button> </router-link>
+        <router-link to="/delete-item"> <button>Delete Page</button> </router-link>
+        <router-link to="/update-item"> <button>Update Page</button> </router-link>
+      </p>
+      
+    </div>
+    <div>
+      <p>
+        <router-view></router-view>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -31,7 +39,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-h3{
+h1, h3{
     text-align: center;
+}
+p{
+  text-align:center;
 }
 </style>

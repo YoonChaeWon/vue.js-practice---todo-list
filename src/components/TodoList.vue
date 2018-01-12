@@ -19,24 +19,23 @@
             </tr>
         </table>
     </div>
+
+    
 </template>
 
 <script>
 import { eventBus } from '../main.js'
 import TodoItem from './TodoItem.vue'
+import AddItem from './AddItem.vue'
 
 export default {
     components: {
-        TodoItem
-    },
-    created() {
-        eventBus.$on('addition', function(data){
-            
-        })
+        TodoItem,
+        AddItem
     },
     data(){
-        return{
-            todos:[
+        return {
+            todos: [
                 {id: 1, todo: 'Todo1', desc: 'Todo1입니다.', 
                     importance: '1', due: ''},
                 {id: 2, todo: 'Todo2', desc: 'Todo2입니다.', 
@@ -48,8 +47,7 @@ export default {
     },
     methods:{
         addTodo: function(){
-
-            this.todos.push({})
+            console.log('data')
         }
     },
     name: 'TodoList'
