@@ -3,18 +3,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-
-window.Vue = Vue;
+import router from './router'
 
 export const eventBus = new Vue();
 
+window.Vue = Vue;
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
+  components: { App },
   el: '#app',
-  template: '<App/>',
-  components: { App }
+  router,
+  template: '<App/>'
 })

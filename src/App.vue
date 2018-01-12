@@ -2,8 +2,10 @@
   <div id="app">
     <HeaderMessage></HeaderMessage>
     <TodoList></TodoList>
-
-    <AddItem></AddItem>
+    <router-link to="/additem">
+      <button> Add </button>
+    </router-link>
+    <router-view></router-view>
   </div>
 </template>
 

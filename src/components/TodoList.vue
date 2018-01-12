@@ -34,10 +34,7 @@ export default {
     },
     created() {
         eventBus.$on('addition', function(data){
-            console.log(data[0])
-            console.log(data[1])
-            console.log(data[2])
-            console.log(data[3])
+            
         })
     },
     data(){
@@ -50,6 +47,12 @@ export default {
                 {id: 3, todo: 'Todo3', desc: 'Todo3입니다.', 
                     importance: '5', due: ''}
             ]
+        }
+    },
+    methods:{
+        addTodo: function(){
+
+            this.todos.push({})
         }
     },
     name: 'TodoList'
