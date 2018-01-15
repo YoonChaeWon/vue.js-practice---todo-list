@@ -18,11 +18,18 @@
                 </TodoItem>
             </tr>
         </table>
-        <div><button @click="getTodos">call</button></div>
+        <div v-if="hasResult">
+            <div v-for="post in posts" :key="post.id">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+        <button v-else @click="searchTerm"> Call </button>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { eventBus } from '../main.js'
 import TodoItem from './TodoItem.vue'
 import AddItem from './AddItem.vue'
@@ -32,6 +39,11 @@ export default {
     components: {
         TodoItem,
         AddItem
+    },
+    computed: {
+        hasResult: function(){
+            return this.posts.length > 0
+        }
     },
     data(){
         return {
@@ -57,15 +69,13 @@ export default {
         deleteTodo(data){
             this.todos.splice(data, 1)
         },
-        getTodos(){
-            // const baseURI = 'https://jsonplaceholder.typicode.com'
-            // this.$http.get('${baseURI}/posts').then((result)=> {
-            //     console.log(result)
-            //     this.posts = result.data
-            // })
-        },
-        getTodo(){
-            
+        searchTerm(){
+               const baseURI='https://jsonplaceholder.typicode.com'
+               this.$http.get('https://jsonplaceholder.typicode.com/posts')
+               .then((result) => {
+                   console.log(result)
+                   this.posts = result.data
+               })
         },
         sendTodos(){
             eventBus.emit('todolist', this.todos)
