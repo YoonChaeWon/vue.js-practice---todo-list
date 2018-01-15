@@ -1,21 +1,31 @@
 <template>
     <div>
-        <h2>{{todo.todo}}</h2>
+        <h2>{{$route.params.todo}}</h2>
         <b>Description: </b>
-        <div>{{todo.desc}}</div>
+        <div>{{$route.params.desc}}</div>
         <b> Importance: </b>
-        <div>{{todo.importance}}</div>
+        <div>{{$route.params.importance}}</div>
         <b> Due: </b>
-        <div>{{todo.due}}</div>
+        <div>{{$route.params.due}}</div>
     </div>
 </template>
 
 <script>
+import { eventBus } from '../main.js'
+
 export default({
-    props: {
-        todo: {
-            type: Object
+    created(){
+        eventBus.$on('todolist', function(data){
+            console.log(data)
+        })
+    },
+    data: function(){
+        return{
+            
         }
-    }  
+    },
+    methods: {
+    },
+    name:'TodoInfo'
 })
 </script>

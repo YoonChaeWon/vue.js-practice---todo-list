@@ -58,14 +58,17 @@ export default {
             this.todos.splice(data, 1)
         },
         getTodos(){
-            const baseURI = 'https://jsonplaceholder.typicode.com'
-            this.$http.get('${baseURI}/posts').then((result)=> {
-                console.log(result)
-                this.posts = result.data
-            })
+            // const baseURI = 'https://jsonplaceholder.typicode.com'
+            // this.$http.get('${baseURI}/posts').then((result)=> {
+            //     console.log(result)
+            //     this.posts = result.data
+            // })
         },
         getTodo(){
-
+            
+        },
+        sendTodos(){
+            eventBus.emit('todolist', this.todos)
         }
     },
     mounted(){

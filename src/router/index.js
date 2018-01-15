@@ -6,6 +6,7 @@ import VueRouter from 'vue-router'
 import TodoList from '@/components/TodoList'
 import AddItem from '@/components/AddItem'
 import DeleteItem from '@/components/DeleteItem'
+import TodoInfo from '@/components/TodoInfo'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ export default new VueRouter({
         {
             path: '/',
             component: TodoList
+        },
+        {
+            name: 'info',
+            path: '/info/:todo_id',
+            component: TodoInfo
         },
         {
             path: '/add-item',

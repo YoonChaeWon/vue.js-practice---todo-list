@@ -2,7 +2,9 @@
     <div class="item">
         <tr>
             <td>{{ todo.id }}</td>
-            <router-link to="/id"><td>{{ todo.todo }}</td></router-link>
+            <router-link :to="{name: 'info', params:{todo_id: todo.id}}">
+                <td>{{ todo.todo }}</td>
+            </router-link>
             <td>{{ todo.desc }}</td>
             <td>{{ todo.importance }}</td>
             <td>{{ todo.due }}</td>
