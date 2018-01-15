@@ -4,11 +4,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import router from './router'
+import axios from 'axios'
 
 export const eventBus = new Vue({});
 
 window.Vue = Vue;
 Vue.use(VueRouter)
+Vue.prototype.$http = axios // axios  추가
 
 /* eslint-disable no-new */
 new Vue({

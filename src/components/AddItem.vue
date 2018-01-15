@@ -43,7 +43,6 @@ export default{
     methods: {
         addTodo: function(){
             eventBus.$emit('add', [this.todo, this.desc, this.importance, this.due])
-            this.$forceUpdate()
         }
     },
     name: 'AddItem'

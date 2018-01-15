@@ -18,6 +18,7 @@
                 </TodoItem>
             </tr>
         </table>
+        <div><button @click="getTodos">call</button></div>
     </div>
 </template>
 
@@ -43,6 +44,7 @@ export default {
                     importance: '5', due: ''}
             ],
             newid: 4,
+            posts:[]
         }
     },
     methods:{
@@ -51,14 +53,28 @@ export default {
                 {id: this.newid++, todo: d1, desc: d2, 
                  importance: d3, due: d4}
             )
-            console.log("addTodo ==> " + this.todos[3].id + ": " + this.todos[3].todo)
-            console.log("next id = " + this.newid)
+        },
+        deleteTodo(data){
+            this.todos.splice(data, 1)
+        },
+        getTodos(){
+            const baseURI = 'https://jsonplaceholder.typicode.com'
+            this.$http.get('${baseURI}/posts').then((result)=> {
+                console.log(result)
+                this.posts = result.data
+            })
+        },
+        getTodo(){
+
         }
     },
     mounted(){
         let self = this
         eventBus.$on('add', function(data){
             self.addTodo(data[0], data[1], data[2], data[3])
+        })
+        eventBus.$on('delete', function(data){
+            self.deleteTodo(data)
         })
     },
     name: 'TodoList'
