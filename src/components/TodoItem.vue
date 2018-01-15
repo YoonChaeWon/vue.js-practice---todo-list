@@ -6,6 +6,7 @@
             <td>{{ todo.desc }}</td>
             <td>{{ todo.importance }}</td>
             <td>{{ todo.due }}</td>
+            <td><button> Delete </button></td>
         </tr>
     </div>
 </template>

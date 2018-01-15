@@ -19,7 +19,6 @@
             </tr>
         </table>
     </div>
-
     
 </template>
 
@@ -28,15 +27,11 @@ import { eventBus } from '../main.js'
 import TodoItem from './TodoItem.vue'
 import AddItem from './AddItem.vue'
 import DeleteItem from './DeleteItem.vue'
+
 export default {
     components: {
         TodoItem,
         AddItem
-    },
-    created(){
-        eventBus.$on('delete-todo', function(data){
-            console.log(data)
-        })
     },
     data(){
         return {
@@ -47,13 +42,27 @@ export default {
                     importance: '2', due: '2018-01-30'},
                 {id: 3, todo: 'Todo3', desc: 'Todo3입니다.', 
                     importance: '5', due: ''}
-            ]
+            ],
+            newid: 4,
+            todo: '',
+            desc: '',
+            importance: '',
+            due: ''
         }
     },
     methods:{
-        addTodo: function(){
-            console.log('data')
+        addTodo(d1, d2, d3, d4){
+            this.todos.push(
+                {id: this.newid++, todo: d1, desc: d2, 
+                 importance: d3, due: d4}
+            )
         }
+    },
+    mounted(){
+        let self = this
+        eventBus.$on('add', function(data){
+            self.addTodo(data[0], data[1], data[2], data[3])
+        })
     },
     name: 'TodoList'
 }

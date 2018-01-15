@@ -23,7 +23,8 @@
                 <label for="due"> 기한: </label>
                 <input type="date" v-model="due" id="userdue" name="userdue" value="">
             </p>
-            <button class="create">Add</button>
+            <router-link to="/"><button class="create" @click="addTodo">Add</button></router-link>
+
     </div>
 </template>
 
@@ -41,7 +42,7 @@ export default{
     },
     methods: {
         addTodo: function(){
-
+            eventBus.$emit('add', [this.todo, this.desc, this.importance, this.due])
         }
     },
     name: 'AddItem'
