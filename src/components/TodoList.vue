@@ -13,13 +13,13 @@
             <tr>
                 <TodoItem v-for="item in todos"
                         :key="item.id"
-                        v-bind:id="item.id"
+                        :id="item.id"
                         :todo="item">
                 </TodoItem>
             </tr>
         </table>
+        <button @click="addTodo"> add </button>
     </div>
-    
 </template>
 
 <script>
@@ -44,10 +44,6 @@ export default {
                     importance: '5', due: ''}
             ],
             newid: 4,
-            todo: '',
-            desc: '',
-            importance: '',
-            due: ''
         }
     },
     methods:{
@@ -56,6 +52,8 @@ export default {
                 {id: this.newid++, todo: d1, desc: d2, 
                  importance: d3, due: d4}
             )
+            console.log("addTodo ==> " + this.todos[3].id + ": " + this.todos[3].todo)
+            console.log("next id = " + this.newid)
         }
     },
     mounted(){

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div id="home">
+      
       <router-link to="/"> <HeaderMessage></HeaderMessage> </router-link>
+      
       <p>
         <router-link to="/add-item"> <button>Add Page</button> </router-link>
         <router-link to="/delete-item"> <button>Delete Page</button> </router-link>
@@ -11,7 +13,9 @@
     </div>
     <div>
       <p>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </p>
     </div>
   </div>

@@ -16,8 +16,7 @@ export default{
     name: 'TodoItem',
     props: {
         todo: {
-            type: Object,
-            required: true
+            type: Object
         }
     }
 }
