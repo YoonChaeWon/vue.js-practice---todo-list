@@ -18,7 +18,6 @@
                 </TodoItem>
             </tr>
         </table>
-        <button @click="addTodo"> add </button>
     </div>
 </template>
 
