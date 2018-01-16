@@ -1,55 +1,40 @@
 <template>
     <div class="top">
-        <table class="thead">
-            <tr>
-                <th> </th>
-                <th>Todo</th>
-                <th>Description</th>
-                <th>Importance</th>
-                <th>Due</th>
-            </tr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Todo</th>
+                    <th>Description</th>
+                    <th>Importance</th>
+                    <th>Due</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="todo in todos">
+                     <td>{{ todo.id }}</td>
+                    <!-- <router-link :to="{name: 'info', params:{todo_id: todo.id}}"> -->
+                        <td>{{ todo.todo }}</td>
+                    <!-- </router-link> -->
+                    <td>{{ todo.desc }}</td>
+                    <td>{{ todo.importance }}</td>
+                    <td>{{ todo.due }}</td>
+                </tr>
+            </tbody>
         </table>
-        <table class="tbody">
-            <tr>
-                <TodoItem v-for="item in todos"
-                        :key="item.id"
-                        :id="item.id"
-                        :todo="item">
-                </TodoItem>
-            </tr>
-        </table>
 
-        <button @click="insertTodoList"> List Insert </button>
-
-        <div v-if="hasResult">
-            <div v-for="post in posts" :key="post.id">
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.body }}</p>
-            </div>
-        </div>
-        <button v-else @click="searchTerm"> Call </button>
-
-        <div>
-            <input type="text" v-model="postBody" @keyup.enter="impPost()"/>
-            <ul v-if="errors && errors.length">
-                <li v-for="error in errors>
-                    {{error.message}}
-                </li>
-            </ul>
-        </div>
+        <button type="button" class="btn btn-primary" @click="insertTodoList">List Insert</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 import { eventBus } from '../main.js'
-import TodoItem from './TodoItem.vue'
 import AddItem from './AddItem.vue'
 import DeleteItem from './DeleteItem.vue'
 
 export default {
     components: {
-        TodoItem,
         AddItem
     },
     computed: {
@@ -84,7 +69,6 @@ export default {
             this.todos.splice(data, 1)
         },
         insertTodoList(){
-            
             axios.post('http://crud-vuejs.vivans.net:35000/mongo/rc_api/v1.0/todos', {
                 todos: [
                     {id: 1, todo: 'Todo1', desc: 'Todo1입니다.', importance: '1', due: ''},
@@ -105,7 +89,7 @@ export default {
         },
         impPost(){
             console.log('impPost', 'impPoist is implementing...')
-           axios.post('http://jsonplaceholder.typicode.com/posts', {
+            axios.post('http://jsonplaceholder.typicode.com/posts', {
                title: this.postTittle,
                body: this.postBody
            })
@@ -133,11 +117,5 @@ export default {
 </script>
 
 <style>
-.thead{
-    width: 70%;
-    margin: auto;
-}
-.tbody{
-    width: 90%;
-}
+
 </style>
