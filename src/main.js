@@ -2,9 +2,15 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+
+import 'expose-loader?$!expose-loader?jQuery!jquery'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import App from './App'
 import router from './router'
-import axios from 'axios'
+
 
 export const eventBus = new Vue({});
 

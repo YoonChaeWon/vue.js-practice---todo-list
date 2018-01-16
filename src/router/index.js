@@ -7,6 +7,7 @@ import TodoList from '@/components/TodoList'
 import AddItem from '@/components/AddItem'
 import DeleteItem from '@/components/DeleteItem'
 import TodoInfo from '@/components/TodoInfo'
+import Login from '@/components/Login'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,13 @@ export default new VueRouter({
     mode:'history', 
     routes: [
         {
-            path: '/',
+            name: 'login',
+            path: '/login',
+            component: Login
+        },
+        {
+            name: 'list',
+            path: '/list',
             component: TodoList
         },
         {
@@ -24,12 +31,12 @@ export default new VueRouter({
             component: TodoInfo
         },
         {
-            path: '/add-item',
+            path: '/addtodo',
             name: 'AddItem',
             component: AddItem
         },
         {
-            path: '/delete-item',
+            path: '/deletetodo',
             component: DeleteItem
         }
     ]

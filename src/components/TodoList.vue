@@ -25,6 +25,15 @@
             </div>
         </div>
         <button v-else @click="searchTerm"> Call </button>
+
+        <div>
+            <input type="text" v-model="postTitle" @change="impPost()"/>
+            <ul v-if="errors && errors.length">
+                <li v-for="error in errors>
+                    {{error.message}}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -56,7 +65,10 @@ export default {
                     importance: '5', due: ''}
             ],
             newid: 4,
-            posts:[]
+            posts:[],
+            postTitle:'',
+            postBody: 'Test',
+            errors:[]
         }
     },
     methods:{
@@ -71,11 +83,22 @@ export default {
         },
         searchTerm(){
                const baseURI='https://jsonplaceholder.typicode.com'
-               this.$http.get('https://jsonplaceholder.typicode.com/posts')
+               axios.get('https://jsonplaceholder.typicode.com/posts')
                .then((result) => {
                    console.log(result)
                    this.posts = result.data
                })
+        },
+        impPost(){
+            console.log('impPost', 'impPost is implemented')
+           axios.post('http://jsonplaceholder.typicode.com/posts', {
+               title: this.postTitle,
+               body: this.postBody
+           })
+           .then(response => {})
+           .catch(e => {
+               this.error.push(e)
+           })
         },
         sendTodos(){
             eventBus.emit('todolist', this.todos)

@@ -1,6 +1,6 @@
 <template>
     <div class="page-header">
-        <h1> {{ message }} </h1>
+        <h2> {{ message }} </h2>
     </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
     name: 'HeaderMessage',
     data: function(){
         return{
-            message: 'Home'
+            message: 'Sample Home'
         }
     }
 }

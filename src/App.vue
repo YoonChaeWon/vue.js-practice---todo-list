@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <div id="home">
-      
-      <router-link to="/"> <HeaderMessage></HeaderMessage> </router-link>
-      
+
+      <router-link to="/login"> login </router-link>
+
+      <div class="page-header">
+        <router-link to="/"><h2> Home </h2> </router-link>
+      </div>
       <p>
-        <router-link to="/add-item"> <button>Add Page</button> </router-link>
-        <router-link to="/delete-item"> <button>Delete Page</button> </router-link>
-        <router-link to="/update-item"> <button>Update Page</button> </router-link>
+        <router-link to="/list"><button> Show List </button></router-link>
+        <router-link to="/addtodo"> <button>Add Page</button> </router-link>
+        <router-link to="/deletetodo"> <button>Delete Page</button> </router-link>
+        <router-link to="/updatetodo"> <button>Update Page</button> </router-link>
       </p>
       
     </div>
@@ -45,7 +49,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-h1, h3{
+h1, h2, h3{
     text-align: center;
 }
 p{
