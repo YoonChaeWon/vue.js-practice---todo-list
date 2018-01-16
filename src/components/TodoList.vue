@@ -18,6 +18,9 @@
                 </TodoItem>
             </tr>
         </table>
+
+        <button @click="insertTodoList"> List Insert </button>
+
         <div v-if="hasResult">
             <div v-for="post in posts" :key="post.id">
                 <h2>{{ post.title }}</h2>
@@ -27,7 +30,7 @@
         <button v-else @click="searchTerm"> Call </button>
 
         <div>
-            <input type="text" v-model="postTitle" @change="impPost()"/>
+            <input type="text" v-model="postBody" @keyup.enter="impPost()"/>
             <ul v-if="errors && errors.length">
                 <li v-for="error in errors>
                     {{error.message}}
@@ -66,8 +69,7 @@ export default {
             ],
             newid: 4,
             posts:[],
-            postTitle:'',
-            postBody: 'Test',
+            postBody: '',
             errors:[]
         }
     },
@@ -81,8 +83,20 @@ export default {
         deleteTodo(data){
             this.todos.splice(data, 1)
         },
+        insertTodoList(){
+            
+            axios.post('http://crud-vuejs.vivans.net:35000/mongo/rc_api/v1.0/todos', {
+                todos: [
+                    {id: 1, todo: 'Todo1', desc: 'Todo1입니다.', importance: '1', due: ''},
+                    {id: 2, todo: 'Todo2', desc: 'Todo2입니다.', importance: '2', due: '2018-01-30'},
+                    {id: 3, todo: 'Todo3', desc: 'Todo3입니다.', importance: '5', due: ''}
+                ]
+            }).then((result) => {
+                console.log('Insert Todo List in DB')
+                console.log(result)
+            })
+        },
         searchTerm(){
-               const baseURI='https://jsonplaceholder.typicode.com'
                axios.get('https://jsonplaceholder.typicode.com/posts')
                .then((result) => {
                    console.log(result)
@@ -90,9 +104,9 @@ export default {
                })
         },
         impPost(){
-            console.log('impPost', 'impPost is implemented')
+            console.log('impPost', 'impPoist is implementing...')
            axios.post('http://jsonplaceholder.typicode.com/posts', {
-               title: this.postTitle,
+               title: this.postTittle,
                body: this.postBody
            })
            .then(response => {})

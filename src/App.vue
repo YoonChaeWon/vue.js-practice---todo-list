@@ -3,7 +3,6 @@
     <div id="home">
       <div class="page-header">
         <router-link to="/"><h2> Home </h2> </router-link>
-        <button class="but btn-primary" @click="login"> button </button>
       </div>
       <p>
         <router-link to="/list"><button> Show List </button></router-link>
@@ -37,18 +36,6 @@ export default {
     TodoList,
     AddItem,
     DeleteItem
-  },
-  methods:{
-    login(){
-      this.$http.post('http://crud-vuejs.vivans.net:35000/aaa/api/v1.0/login', {
-        "user_id": "vuejs",
-        "password": "34db9a6d86aaac93b3e784e9ec6f3b11c2128c0abe8e4922ceac53e0b8895a4e"
-      })
-      .then(function(response){
-        console.log('login !')
-        console.log(response)
-      })
-    }
   }
 }
 </script>

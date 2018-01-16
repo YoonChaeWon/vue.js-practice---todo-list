@@ -17,6 +17,15 @@ window.Vue = Vue;
 Vue.use(VueRouter)
 Vue.prototype.$http = axios // axios  추가
 
+axios.post('http://crud-vuejs.vivans.net:35000/aaa/api/v1.0/login', {
+        "user_id": "vuejs",
+        "password": "34db9a6d86aaac93b3e784e9ec6f3b11c2128c0abe8e4922ceac53e0b8895a4e"
+      })
+      .then(function(response){
+        console.log('login !')
+        console.log(response)  
+      })
+
 /* eslint-disable no-new */
 new Vue({
   components: { App },
