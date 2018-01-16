@@ -3,10 +3,12 @@
 //1. 라우트 컴포넌트 정의 ( 가져오기 )
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import TodoList from '@/components/TodoList'
 import AddItem from '@/components/AddItem'
 import DeleteItem from '@/components/DeleteItem'
 import TodoInfo from '@/components/TodoInfo'
+
 Vue.use(VueRouter)
 
 //2. 라우트 정의 및 인스턴스 생성해서 내보내기

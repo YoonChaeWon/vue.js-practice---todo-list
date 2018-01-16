@@ -23,7 +23,7 @@
                 <label for="due"> 기한: </label>
                 <input type="date" v-model="due" id="userdue" name="userdue" value="">
             </p>
-            <button class="create" @click="addTodo">Add</button>
+            <button class="btn btn-primary" @click="addTodo">Add</button>
 
     </div>
 </template>

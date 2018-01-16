@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="todo in todos">
+                <tr v-for="todo in todos" :key="todo.id">
                      <td>{{ todo.id }}</td>
                     <!-- <router-link :to="{name: 'info', params:{todo_id: todo.id}}"> -->
                         <td>{{ todo.todo }}</td>
@@ -22,7 +22,7 @@
                 </tr>
             </tbody>
         </table>
-
+        <button type="button" class="btn btn-primary" @click="getTodoList">Get List</button>
         <button type="button" class="btn btn-primary" @click="insertTodoList">List Insert</button>
     </div>
 </template>
@@ -32,6 +32,7 @@ import axios from 'axios'
 import { eventBus } from '../main.js'
 import AddItem from './AddItem.vue'
 import DeleteItem from './DeleteItem.vue'
+import axiosInstance from '../main.js'
 
 export default {
     components: {
@@ -44,14 +45,7 @@ export default {
     },
     data(){
         return {
-            todos: [
-                {id: 1, todo: 'Todo1', desc: 'Todo1입니다.', 
-                    importance: '1', due: ''},
-                {id: 2, todo: 'Todo2', desc: 'Todo2입니다.', 
-                    importance: '2', due: '2018-01-30'},
-                {id: 3, todo: 'Todo3', desc: 'Todo3입니다.', 
-                    importance: '5', due: ''}
-            ],
+            todos: [],
             newid: 4,
             posts:[],
             postBody: '',
@@ -69,7 +63,7 @@ export default {
             this.todos.splice(data, 1)
         },
         insertTodoList(){
-            axios.post('http://crud-vuejs.vivans.net:35000/mongo/rc_api/v1.0/todos', {
+            axios.post('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos', {
                 todos: [
                     {id: 1, todo: 'Todo1', desc: 'Todo1입니다.', importance: '1', due: ''},
                     {id: 2, todo: 'Todo2', desc: 'Todo2입니다.', importance: '2', due: '2018-01-30'},
@@ -80,9 +74,16 @@ export default {
                 console.log(result)
             })
         },
+        getTodoList(){
+            axios.get('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos')
+            .then((response)=>{
+                console.log(response)
+                this.todos = response.data
+            })
+        },
         searchTerm(){
-               axios.get('https://jsonplaceholder.typicode.com/posts')
-               .then((result) => {
+            axios.get('https://jsonplaceholder.typicode.com/posts')
+                .then((result) => {
                    console.log(result)
                    this.posts = result.data
                })
