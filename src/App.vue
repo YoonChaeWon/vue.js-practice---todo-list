@@ -45,6 +45,7 @@ export default {
         "password": "34db9a6d86aaac93b3e784e9ec6f3b11c2128c0abe8e4922ceac53e0b8895a4e"
       })
       .then(function(response){
+        console.log('login !')
         console.log(response)
       })
     }
