@@ -7,19 +7,12 @@ import TodoList from '@/components/TodoList'
 import AddItem from '@/components/AddItem'
 import DeleteItem from '@/components/DeleteItem'
 import TodoInfo from '@/components/TodoInfo'
-import Login from '@/components/Login'
-
 Vue.use(VueRouter)
 
 //2. 라우트 정의 및 인스턴스 생성해서 내보내기
 export default new VueRouter({
     mode:'history', 
     routes: [
-        {
-            name: 'login',
-            path: '/login',
-            component: Login
-        },
         {
             name: 'list',
             path: '/list',

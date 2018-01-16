@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App'
 import router from './router'
 
-
 export const eventBus = new Vue({});
 
 window.Vue = Vue;
