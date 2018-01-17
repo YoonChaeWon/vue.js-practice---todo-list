@@ -1,5 +1,6 @@
 <template>
     <div id="delete-page">
+        <h3> Delete Todo Page </h3>
         <p>
             <input placeholder="삭제할 todo의 id입력" 
                    v-model="deleted">

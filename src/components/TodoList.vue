@@ -44,16 +44,18 @@ export default {
     data(){
         return {
             todos: [],
-            newid: 4
+            newid: 1
         }
     },
     created(){
-        
+        this.getTodoList()
     },
     methods:{
         addTodo(d1, d2, d3, d4){
+            var len = this.todos.length
+            console.log('len', len)
             api.post('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos', {
-                "id": this.newid++, "todo": d1, "desc": d2, "importance": d3, "due": d4 
+                "id": ++len, "todo": d1, "desc": d2, "importance": d3, "due": d4 
             }).then((result) => {
                 console.log('addTodo', result)
             })
@@ -67,7 +69,7 @@ export default {
                     console.log('response', response)
                     console.log('getTodoList', response.data.data)
                     this.todos = response.data.data
-            })
+                })
         },
         sendTodos(){
             eventBus.emit('todolist', this.todos)
