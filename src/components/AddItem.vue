@@ -42,7 +42,12 @@ export default{
     },
     methods: {
         addTodo: function(){
+            // TodoList에게 사용자 입력 내용 전송
             eventBus.$emit('add', [this.todo, this.desc, this.importance, this.due])
+            this.todo=''
+            this.desc=''
+            this.importance=''
+            this.due=''
         }
     },
     name: 'AddItem'

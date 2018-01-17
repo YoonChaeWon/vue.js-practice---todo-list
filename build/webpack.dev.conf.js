@@ -22,6 +22,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    headers: {
+      "Access-Control-Allow-Origin": "http://vuejs.crudbot.vivans.net:31230/aaa/api/v1.0/",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-id, Content-Length, X-Requested-With",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTION"
+    }, 
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
