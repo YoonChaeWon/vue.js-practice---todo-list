@@ -23,6 +23,7 @@ export default{
         deleteTodo: function(){
             console.log('in')
             eventBus.$emit('delete', this.deleted)
+            this.deleted=''
         }
     },
     props: ['todos']

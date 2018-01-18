@@ -30,6 +30,10 @@
 <script>
 import api from '../main.js'
 
+var TODO_API = 'http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos'
+var FILTER_API = '?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'
+var REST_API = '%22%7D%7D'
+
 export default{
     data(){
         return{
@@ -44,7 +48,7 @@ export default{
     },
     methods:{
         findTodo(){
-           api.get('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'+this.todo_name+'%22%7D%7D')
+           api.get(TODO_API + FILTER_API +this.todo_name + REST_API)
            .then((response)=>{
                 console.log(response)
                 var temp = response.data.data[0] // 찾은 todo item 
@@ -55,8 +59,7 @@ export default{
             }) 
         },
         updateTodo(){
-            console.log('update', this.todo + "/" + this.desc + "/" + this.importance + "/" + this.due)
-            api.put('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos', {
+            api.put(TODO_API, {
                 "sets": {"todo": this.todo, "desc": this.desc, "importance": this.importance, "due": this.due},
                 "filter": {"todo": this.todo_name}
             }).then((response)=> {
