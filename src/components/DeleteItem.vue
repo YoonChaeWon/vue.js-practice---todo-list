@@ -20,8 +20,12 @@ export default{
     },
     methods: {
         deleteTodo: function(){
-            console.log('in')
-            eventBus.$emit('delete', this.deleted)
+            if(this.deleted.trim() === ''){
+                alert('반드시 입력') 
+            }
+            else{
+                eventBus.$emit('delete', this.deleted)
+            }
             this.deleted=''
         }
     },

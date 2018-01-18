@@ -3,7 +3,7 @@
         <h3> Add Todo Page </h3>
             <p id="i1">
                 <label for="todo"> 할 일: </label>
-                <input id="todo" v-model="todo" placeholder="할 일을 입력하세요" >
+                <input id="todo" v-model="todo" placeholder="할 일을 입력하세요(필수)" >
             </p>
             <p id="i2">
                 <label for="desc"> 세부내용: </label><br>
@@ -43,7 +43,12 @@ export default{
     methods: {
         addTodo: function(){
             // TodoList에게 사용자 입력 내용 전송
-            eventBus.$emit('add', [this.todo, this.desc, this.importance, this.due])
+            if(this.todo.trim() === ''){
+                alert('할 일을 반드시 적어야 함') 
+            }
+            else{
+                eventBus.$emit('add', [this.todo, this.desc, this.importance, this.due])
+            }
             this.todo=''
             this.desc=''
             this.importance=''

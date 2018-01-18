@@ -38,9 +38,9 @@ var REST_API = '%22%7D%7D'
 export default {
     created(){
         api.get(TODO_API)
-               .then((response) => {
-                    this.todos = response.data.data
-                })
+           .then((response) => {
+                this.todos = response.data.data
+            })
     },
     data(){
         return {
@@ -50,12 +50,12 @@ export default {
     },
     methods:{
         addTodo(d1, d2, d3, d4){
-                api.post(TODO_API, {
-                   "todo": d1, "desc": d2, "importance": d3, "due": d4 
-                }).then((response) => {
-                    console.log('addTodo', response)
-                    this.todos.push(response.data.data[0])
-                })
+            api.post(TODO_API, {
+                "todo": d1, "desc": d2, "importance": d3, "due": d4 
+            }).then((response) => {
+                console.log('addTodo', response)
+                this.todos.push(response.data.data[0])
+            })
         },
         deleteTodo(data){
             api.delete(TODO_API + FILTER_API + data + REST_API , {
@@ -63,13 +63,12 @@ export default {
             }).then((response) => {
                 console.log('deleteTodo', response)
                 var index = this.findIndex(data)
-                this.todos.splice(index, 1)
+                console.log('index', index)
             })
         },
         findIndex(data){
             for(var i = 0; i < this.todos.length; i++){
                 if(this.todos[i].todo === data){
-                    console.log(i)
                     return i
                 }
             }
