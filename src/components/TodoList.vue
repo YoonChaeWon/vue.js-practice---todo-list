@@ -3,7 +3,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th></th>
                     <th>Todo</th>
                     <th>Description</th>
                     <th>Importance</th>
@@ -11,8 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="todo in todos" :key="todo.id">
-                    <td>{{ todo.id }}</td>
+                <tr v-for="todo in todos" :key="todo.todo">
                     <td><router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo}}"> {{ todo.todo }}</router-link></td>
                     <td>{{ todo.desc }}</td>
                     <td>{{ todo.importance }}</td>
@@ -43,13 +41,12 @@ export default {
         return {
             todos: [],
             deleted:'',
-            len: 0,
         }
     },
     methods:{
         addTodo(d1, d2, d3, d4){
                 api.post(TODO_API, {
-                    "id": ++this.len, "todo": d1, "desc": d2, "importance": d3, "due": d4 
+                   "todo": d1, "desc": d2, "importance": d3, "due": d4 
                 }).then((response) => {
                     console.log('addTodo', response)
                 })
@@ -65,7 +62,6 @@ export default {
             api.get(TODO_API)
                .then((response) => {
                     this.todos = response.data.data
-                    this.len = this.todos.length
                 })
         }
     },
