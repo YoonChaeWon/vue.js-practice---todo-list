@@ -18,8 +18,7 @@ Vue.use(VueRouter)
 Vue.prototype.$http = axios // axios  추가
 
 const api = axios.create({
-  withCredentials: true,
-  crossDomain : true
+  withCredentials: true
 })
 
 api.post("http://vuejs.crudbot.vivans.net:31230/aaa/api/v1.0/login",{

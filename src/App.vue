@@ -4,13 +4,13 @@
       <div class="page-header">
         <router-link to="/"><h2> Home </h2> </router-link>
       </div>
+      <TodoList></TodoList>
       <p>
-        <router-link to="/list"><button> Show List </button></router-link>
+        <!-- <router-link to="/list"><button> Show List </button></router-link> -->
         <router-link to="/addtodo"> <button>Add Page</button> </router-link>
         <router-link to="/deletetodo"> <button>Delete Page</button> </router-link>
         <router-link to="/updatetodo"> <button>Update Page</button> </router-link>
       </p>
-      
     </div>
     <div>
       <p>

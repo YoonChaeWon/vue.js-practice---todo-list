@@ -2,7 +2,7 @@
     <div id="delete-page">
         <h3> Delete Todo Page </h3>
         <p>
-            <input placeholder="삭제할 todo의 id입력" 
+            <input placeholder="삭제할 todo 입력" 
                    v-model="deleted">
             <button @click="deleteTodo">삭제</button>
         </p>

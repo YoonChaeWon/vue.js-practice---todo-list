@@ -22,7 +22,9 @@
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary" @click="getTodoList">Get List</button>
+        <div>
+            <button type="button" class="btn btn-primary" @click="getTodoList">Get List</button>
+        </div>
     </div>
 </template>
 
@@ -36,43 +38,39 @@ export default {
     components: {
         AddItem
     },
-    computed: {
-        hasResult: function(){
-            return this.posts.length > 0
-        }
-    },
     data(){
         return {
             todos: [],
-            newid: 1
+            deleted:'',
+            len: 0
         }
     },
     created(){
-        this.getTodoList()
+        
     },
     methods:{
         addTodo(d1, d2, d3, d4){
-            var len = this.todos.length
-            console.log('len', len)
+            console.log(this.len)
             api.post('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos', {
-                "id": ++len, "todo": d1, "desc": d2, "importance": d3, "due": d4 
+                "id": ++this.len, "todo": d1, "desc": d2, "importance": d3, "due": d4 
             }).then((result) => {
                 console.log('addTodo', result)
             })
         },
         deleteTodo(data){
-            this.todos.splice(data, 1)
+            api.delete('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos',{
+                    "todo": data
+            }).then((response)=>{
+                console.log('deleteTodo', response)
+                })
+            this.len--
         },
         getTodoList(){
             api.get('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos')
                 .then((response)=>{
-                    console.log('response', response)
-                    console.log('getTodoList', response.data.data)
                     this.todos = response.data.data
+                    this.len = this.todos.length
                 })
-        },
-        sendTodos(){
-            eventBus.emit('todolist', this.todos)
         }
     },
     mounted(){
