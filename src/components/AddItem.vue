@@ -1,5 +1,5 @@
 <template>
-    <div class="addition">
+    <div class="add-page">
         <h3> Add Todo Page </h3>
             <p id="i1">
                 <label for="todo"> 할 일: </label>

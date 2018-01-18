@@ -13,9 +13,9 @@
             <tbody>
                 <tr v-for="todo in todos" :key="todo.id">
                      <td>{{ todo.id }}</td>
-                    <!-- <router-link :to="{name: 'info', params:{todo_id: todo.id}}"> -->
-                    <td>{{ todo.todo }}</td>
-                    <!-- </router-link> -->
+                    <router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo}}"> 
+                        <td>{{ todo.todo }}</td>
+                     </router-link> 
                     <td>{{ todo.desc }}</td>
                     <td>{{ todo.importance }}</td>
                     <td>{{ todo.due }}</td>
@@ -25,6 +25,14 @@
         <div>
             <button type="button" class="btn btn-primary" @click="getTodoList">Get List</button>
         </div>
+        <div>
+            <p>
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
+            </p>
+        </div>
+        
     </div>
 </template>
 
@@ -53,8 +61,8 @@ export default {
             console.log(this.len)
             api.post('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos', {
                 "id": ++this.len, "todo": d1, "desc": d2, "importance": d3, "due": d4 
-            }).then((result) => {
-                console.log('addTodo', result)
+            }).then((response) => {
+                console.log('addTodo', response)
             })
         },
         deleteTodo(data){

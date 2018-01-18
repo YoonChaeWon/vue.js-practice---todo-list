@@ -7,7 +7,7 @@ import VueRouter from 'vue-router'
 import TodoList from '@/components/TodoList'
 import AddItem from '@/components/AddItem'
 import DeleteItem from '@/components/DeleteItem'
-import TodoInfo from '@/components/TodoInfo'
+import UpdateItem from '@/components/UpdateItem'
 
 Vue.use(VueRouter)
 
@@ -21,13 +21,13 @@ export default new VueRouter({
             component: TodoList
         },
         {
-            name: 'info',
-            path: '/info/:todo_id',
-            component: TodoInfo
+            name: 'updatetodo',
+            path: '/updatetodo/:todo_name',
+            component: UpdateItem,
+            props: true // pass route.params to props
         },
         {
             path: '/addtodo',
-            name: 'AddItem',
             component: AddItem
         },
         {

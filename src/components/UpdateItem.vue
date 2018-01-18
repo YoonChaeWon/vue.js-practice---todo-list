@@ -1,0 +1,69 @@
+<template>
+    <div id="update-page">
+        <h3> Update Todo Page </h3>
+        <h4> {{todo_name}} 수정 </h4>
+        <p id="i1">
+            <label for="todo"> 할 일: </label>
+            <input id="todo" v-model="todo" placeholder="할 일을 입력하세요" >
+        </p>
+        <p id="i2">
+            <label for="desc"> 세부내용: </label><br>
+            <textarea id="desc" cols="40" rows="10" v-model="desc"></textarea>
+        </p>
+        <p id="i3">
+            <label for="importance"> 중요도: </label>
+            <select v-model="importance">
+                <option v-for="option in options" :key="option.num">
+                        {{option.num}}
+                </option>
+            </select>
+        </p>
+        <p id="i4">
+            <label for="due"> 기한: </label>
+            <input type="date" v-model="due" id="userdue" name="userdue" value="">
+        </p>
+        <button class="btn btn-danger" @click="findTodo">Bring</button>
+        <button class="btn btn-primary" @click="updateTodo">Edit</button>
+    </div>
+</template>
+
+<script>
+import api from '../main.js'
+
+export default{
+    data(){
+        return{
+          todo: '',
+          desc: '',
+          importance: '',
+          due: '',
+          options: [
+              {num: 1}, {num: 2}, {num: 3}, {num: 4}, {num: 5}
+          ]
+        }
+    },
+    methods:{
+        findTodo(){
+           api.get('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'+this.todo_name+'%22%7D%7D')
+           .then((response)=>{
+                console.log(response)
+                var temp = response.data.data[0] // 찾은 todo item 
+                this.todo = temp.todo
+                this.desc = temp.desc
+                this.importance = temp.importance
+                this.due = this.due
+            }) 
+        },
+        updateTodo(){
+            console.log('update', this.todo + "/" + this.desc + "/" + this.importance + "/" + this.due)
+            api.put('http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos', {
+                "sets": {"todo": this.todo, "desc": this.desc, "importance": this.importance, "due": this.due},
+                "filter": {"todo": this.todo_name}
+            }).then((response)=> {
+                console.log(response)
+            })
+        }
+    },
+    props:['todo_name']
+}
+</script>
