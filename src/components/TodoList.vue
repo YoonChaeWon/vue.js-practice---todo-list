@@ -18,7 +18,6 @@
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary" @click="getTodoList">Get List</button>
         <div>
             <p>
                 <keep-alive> <router-view></router-view> </keep-alive>
@@ -37,6 +36,12 @@ var FILTER_API = '?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'
 var REST_API = '%22%7D%7D'
 
 export default {
+    created(){
+        api.get(TODO_API)
+               .then((response) => {
+                    this.todos = response.data.data
+                })
+    },
     data(){
         return {
             todos: [],
@@ -49,6 +54,7 @@ export default {
                    "todo": d1, "desc": d2, "importance": d3, "due": d4 
                 }).then((response) => {
                     console.log('addTodo', response)
+                    this.todos.push(response.data.data[0])
                 })
         },
         deleteTodo(data){
@@ -56,13 +62,17 @@ export default {
                     "filter": {"todo": data}
             }).then((response) => {
                 console.log('deleteTodo', response)
+                var index = this.findIndex(data)
+                this.todos.splice(index, 1)
             })
         },
-        getTodoList(){
-            api.get(TODO_API)
-               .then((response) => {
-                    this.todos = response.data.data
-                })
+        findIndex(data){
+            for(var i = 0; i < this.todos.length; i++){
+                if(this.todos[i].todo === data){
+                    console.log(i)
+                    return i
+                }
+            }
         }
     },
     mounted(){

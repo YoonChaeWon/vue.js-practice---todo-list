@@ -6,7 +6,6 @@
                    v-model="deleted">
             <button @click="deleteTodo">삭제</button>
         </p>
-        {{ deleted }}
     </div>
 </template>
 
