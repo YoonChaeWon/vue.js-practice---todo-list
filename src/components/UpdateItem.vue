@@ -35,29 +35,19 @@ var FILTER_API = '?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'
 var REST_API = '%22%7D%7D'
 
 export default{
+    props:['todo_name', 'p_desc', 'p_imp', 'p_due'],
     data(){
         return{
-           todo: this.todo_name,
-           desc: this.p_desc,
-           importance: this.p_imp,
-           due: this.p_due,
-          options: [
+            todo: this.todo_name,
+            desc: this.p_desc,
+            importance: this.p_imp,
+            due: this.p_due,
+            options: [
               {num: 1}, {num: 2}, {num: 3}, {num: 4}, {num: 5}
-          ]
+            ]
         }
     },
     methods:{
-        findTodo(){
-           api.get(TODO_API + FILTER_API +this.todo_name + REST_API)
-           .then((response)=>{
-                console.log(response)
-                var temp = response.data.data[0] // 찾은 todo item 
-                this.todo = temp.todo
-                this.desc = temp.desc
-                this.importance = temp.importance
-                this.due = this.due
-            }) 
-        },
         updateTodo(){
             api.put(TODO_API, {
                 "sets": {"todo": this.todo, "desc": this.desc, "importance": this.importance, "due": this.due},
@@ -68,6 +58,19 @@ export default{
             })
         }
     },
-    props:['todo_name', 'p_desc', 'p_imp', 'p_due']
+    watch: {
+       todo_name: function(){
+           this.todo = this.todo_name
+       },
+       p_desc: function(){
+           this.desc = this.p_desc
+       },
+       p_imp: function(){
+           this.importance = this.p_imp
+       },
+       p_due: function(){
+           this.due = this.p_due
+       }
+    }
 }
 </script>

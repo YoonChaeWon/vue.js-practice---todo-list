@@ -12,11 +12,9 @@
             <p id="i3">
                 <label for="importance"> 중요도: </label>
                 <select v-model="importance">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option v-for="option in options" :key="option.num">
+                            {{option.num}}
+                    </option>
                 </select>
             </p>
             <p id="i4">
@@ -24,7 +22,6 @@
                 <input type="date" v-model="due" id="userdue" name="userdue" value="">
             </p>
             <button class="btn btn-primary" @click="addTodo">Add</button>
-
     </div>
 </template>
 
@@ -40,7 +37,10 @@ export default{
             todo: '',
             desc: '',
             importance: '',
-            due: ''
+            due: '',
+            options: [
+              {num: 1}, {num: 2}, {num: 3}, {num: 4}, {num: 5}
+            ]
         }
     },
     methods: {
@@ -67,10 +67,5 @@ export default{
 </script>
 
 <style scoped>
-form{
-    position: relative;
-    margin: 0 auto;
-    width: 20%;
-}
 
 </style>
