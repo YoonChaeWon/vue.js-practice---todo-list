@@ -1,29 +1,28 @@
 <template>
     <div class="top">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Todo</th>
-                    <th>Description</th>
-                    <th>Importance</th>
-                    <th>Due</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="todo in todos" :key="todo.todo">
-                    <td><router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo}}"> {{ todo.todo }}</router-link></td>
-                    <td>{{ todo.desc }}</td>
-                    <td>{{ todo.importance }}</td>
-                    <td>{{ todo.due }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div>
-            <p>
-                <keep-alive> <router-view></router-view> </keep-alive>
-            </p>
+        <div class="list">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Todo</th>
+                        <th>Description</th>
+                        <th>Importance</th>
+                        <th>Due</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="todo in todos" :key="todo.todo">
+                        <td><router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo}}"> {{ todo.todo }}</router-link></td>
+                        <td>{{ todo.desc }}</td>
+                        <td>{{ todo.importance }}</td>
+                        <td>{{ todo.due }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        
+        <p class="router-page">
+            <keep-alive> <router-view></router-view> </keep-alive>
+        </p>  
     </div>
 </template>
 
@@ -63,7 +62,7 @@ export default {
             }).then((response) => {
                 console.log('deleteTodo', response)
                 var index = this.findIndex(data)
-                console.log('index', index)
+                this.todos.splice(index, 1)
             })
         },
         findIndex(data){
@@ -85,9 +84,10 @@ export default {
     },
     name: 'TodoList'
 }
-
 </script>
 
 <style>
-
+tr {display: block; }
+th, td { width: 300px; }
+tbody { display: block; height: 200px; overflow: auto;} 
 </style>
