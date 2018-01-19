@@ -22,14 +22,13 @@
             <label for="due"> 기한: </label>
             <input type="date" v-model="due" id="userdue" name="userdue" value="">
         </p>
-        <!-- <button class="btn btn-danger" @click="findTodo">Bring</button> -->
         <button class="btn btn-primary" @click="updateTodo">Edit</button>
     </div>
 </template>
 
 <script>
 import api from '../main.js'
-
+import router from '../router'
 var TODO_API = 'http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos'
 var FILTER_API = '?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'
 var REST_API = '%22%7D%7D'
@@ -54,7 +53,8 @@ export default{
                 "filter": {"todo": this.todo_name}
             }).then((response)=> {
                 console.log(response)
-                this.findTodo()
+
+                router.push('/')
             })
         }
     },

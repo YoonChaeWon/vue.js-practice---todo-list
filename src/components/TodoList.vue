@@ -13,7 +13,7 @@
                 <tbody>
                     <tr v-for="todo in todos" :key="todo.todo">
                         <td><router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo, p_desc:todo.desc, p_imp: todo.importance, p_due: todo.due}}"> {{ todo.todo }}</router-link></td>
-                        <td>{{ todo.desc }}</td>
+                        <td style="width: 200px; overflow: hidden">{{ todo.desc }}</td>
                         <td>{{ todo.importance }}</td>
                         <td>{{ todo.due }}</td>
                     </tr>
@@ -29,15 +29,18 @@
 <script>
 import api from '../main.js'
 import { eventBus } from '../main.js'
+
 var TODO_API = 'http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos'
 var FILTER_API = '?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'
 var REST_API = '%22%7D%7D'
+
 export default {
+    name: 'TodoList',
     created(){
-        api.get(TODO_API)
-           .then((response) => {
-                this.todos = response.data.data
-            })
+        this.getTodoList()
+    },
+    updated(){
+        this.getTodoList()
     },
     data(){
         return {
@@ -46,12 +49,11 @@ export default {
         }
     },
     methods:{
-        addTodo(data){
-            this.todos.push(data)
-        },
-        deleteTodo(data){
-            var index = this.findIndex(data)
-            this.todos.splice(index, 1)
+        getTodoList(){
+            api.get(TODO_API)
+               .then((response) => {
+                    this.todos = response.data.data
+                })
         },
         findIndex(data){
             for(var i = 0; i < this.todos.length; i++){
@@ -60,22 +62,12 @@ export default {
                 }
             }
         }
-    },
-    mounted(){
-        let self = this
-        eventBus.$on('add', function(data){
-            self.addTodo(data)
-        })
-        eventBus.$on('delete', function(data){
-            self.deleteTodo(data)
-        })
-    },
-    name: 'TodoList'
+    }
 }
 </script>
 
 <style>
 tr {display: block; }
-th, td { width: 300px; }
+th, td { width: 300px; overflow-x:hidden}
 tbody { display: block; height: 200px; overflow: auto;} 
 </style>

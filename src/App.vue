@@ -15,19 +15,13 @@
 </template>
 
 <script>
-import HeaderMessage from './components/HeaderMessage'
 import TodoList from './components/TodoList'
-import AddItem from './components/AddItem'
-import DeleteItem from './components/DeleteItem'
 import axios from 'axios'
 
 export default {
   name: 'app',
   components: {
-    HeaderMessage,
-    TodoList,
-    AddItem,
-    DeleteItem
+    TodoList
   }
 }
 </script>
