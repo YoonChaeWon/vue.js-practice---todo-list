@@ -12,7 +12,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="todo in todos" :key="todo.todo">
-                        <td><router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo}}"> {{ todo.todo }}</router-link></td>
+                        <td><router-link :to="{name: 'updatetodo', params: {todo_name:todo.todo, p_desc:todo.desc, p_imp: todo.importance, p_due: todo.due}}"> {{ todo.todo }}</router-link></td>
                         <td>{{ todo.desc }}</td>
                         <td>{{ todo.importance }}</td>
                         <td>{{ todo.due }}</td>

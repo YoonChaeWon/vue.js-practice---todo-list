@@ -22,7 +22,7 @@
             <label for="due"> 기한: </label>
             <input type="date" v-model="due" id="userdue" name="userdue" value="">
         </p>
-        <button class="btn btn-danger" @click="findTodo">Bring</button>
+        <!-- <button class="btn btn-danger" @click="findTodo">Bring</button> -->
         <button class="btn btn-primary" @click="updateTodo">Edit</button>
     </div>
 </template>
@@ -37,10 +37,10 @@ var REST_API = '%22%7D%7D'
 export default{
     data(){
         return{
-          todo: '',
-          desc: '',
-          importance: '',
-          due: '',
+           todo: this.todo_name,
+           desc: this.p_desc,
+           importance: this.p_imp,
+           due: this.p_due,
           options: [
               {num: 1}, {num: 2}, {num: 3}, {num: 4}, {num: 5}
           ]
@@ -64,9 +64,10 @@ export default{
                 "filter": {"todo": this.todo_name}
             }).then((response)=> {
                 console.log(response)
+                this.findTodo()
             })
         }
     },
-    props:['todo_name']
+    props:['todo_name', 'p_desc', 'p_imp', 'p_due']
 }
 </script>
