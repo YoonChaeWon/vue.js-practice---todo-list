@@ -30,6 +30,9 @@
 
 <script>
 import { eventBus } from '../main.js'
+import api from '../main.js'
+
+var TODO_API = 'http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos'
 
 export default{
     data: function(){
@@ -42,12 +45,16 @@ export default{
     },
     methods: {
         addTodo: function(){
-            // TodoList에게 사용자 입력 내용 전송
             if(this.todo.trim() === ''){
                 alert('할 일을 반드시 적어야 함') 
             }
             else{
-                eventBus.$emit('add', [this.todo, this.desc, this.importance, this.due])
+                api.post(TODO_API, {
+                    "todo": this.todo, "desc": this.desc, "importance": this.importance, "due": this.due 
+                }).then((response) => {
+                    console.log('addTodo', response)
+                    eventBus.$emit('add', response.data.data[0]) // TodoList에게 추가한 todo item 전송
+                })
             }
             this.todo=''
             this.desc=''

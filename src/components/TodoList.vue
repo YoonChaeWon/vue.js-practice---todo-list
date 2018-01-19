@@ -48,22 +48,12 @@ export default {
         }
     },
     methods:{
-        addTodo(d1, d2, d3, d4){
-            api.post(TODO_API, {
-                "todo": d1, "desc": d2, "importance": d3, "due": d4 
-            }).then((response) => {
-                console.log('addTodo', response)
-                this.todos.push(response.data.data[0])
-            })
+        addTodo(data){
+            this.todos.push(data)
         },
         deleteTodo(data){
-            api.delete(TODO_API + FILTER_API + data + REST_API , {
-                    "filter": {"todo": data}
-            }).then((response) => {
-                console.log('deleteTodo', response)
-                var index = this.findIndex(data)
-                this.todos.splice(index, 1)
-            })
+            var index = this.findIndex(data)
+            this.todos.splice(index, 1)
         },
         findIndex(data){
             for(var i = 0; i < this.todos.length; i++){
@@ -76,7 +66,7 @@ export default {
     mounted(){
         let self = this
         eventBus.$on('add', function(data){
-            self.addTodo(data[0], data[1], data[2], data[3])
+            self.addTodo(data)
         })
         eventBus.$on('delete', function(data){
             self.deleteTodo(data)
