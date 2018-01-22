@@ -1,7 +1,8 @@
 <template>
     <div id="update-page">
-        <h3> Update Todo Page </h3>
-        <h4> {{todo_name}} 수정 </h4>
+        <div class="page-header">
+            <h3> Update Todo Page </h3>
+        </div>
         <input-todo :todo="todo" v-model="todo"></input-todo>
         <input-desc :desc="desc" v-model="desc"></input-desc>
         <input-imp :importance="importance" v-model="importance"></input-imp>
@@ -12,13 +13,14 @@
 
 <script>
 import api from '../main.js'
+import { eventBus } from '../main.js'
 import router from '../router'
 import InputTodo from './InputTodo.vue'
 import InputDesc from './InputDesc.vue'
 import InputImp from './InputImp.vue'
 import InputDue from './InputDue.vue'
 
-var TODO_API = 'http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos'
+var TODO_API = 'http://localhost/mongo/rc_api/v1.0/todos'
 var FILTER_API = '?json=%7B%22filter%22%3A%20%7B%22todo%22%3A%20%22'
 var REST_API = '%22%7D%7D'
 
@@ -45,6 +47,7 @@ export default{
                 "filter": {"todo": this.todo_name}
             }).then((response)=> {
                 console.log(response)
+                eventBus.$emit('update', this.todo_name)
                 router.push('/')
             })
         }

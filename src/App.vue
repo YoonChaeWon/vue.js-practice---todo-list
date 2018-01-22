@@ -2,14 +2,9 @@
   <div id="app">
     <div id="home">
       <div class="page-header">
-        <router-link to="/"><h2> Home </h2> </router-link>
-        <p>
-          <router-link to="/addtodo"> <button>Add Page</button> </router-link>
-          <router-link to="/deletetodo"> <button>Delete Page</button> </router-link>
-        </p>
+        <router-link to="/"><h2 class="home"> Home </h2> </router-link>
       </div>
       <TodoList></TodoList>
-
     </div>
   </div>
 </template>
@@ -33,10 +28,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-h1, h2, h3{
-    text-align: center;
+.router-button{
+  text-align: left;
+  padding-left: 1.6%;
 }
-p{
-  text-align:center;
+h3{
+  padding-left: 2%;
+}
+.go-add, .go-delete{
+  background-color: white;
+  border: none;
+}
+.home{
+  text-align: left;
+  padding-left: 2%;
 }
 </style>

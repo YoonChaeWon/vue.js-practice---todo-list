@@ -1,11 +1,17 @@
 <template>
     <div class="add-page">
-        <h3> Add Todo Page </h3>
+        <div class="page-header">
+            <h3> Add Todo Page </h3>
+        </div>
+        <div class="form-group">
             <input-todo v-model="todo"></input-todo>
             <input-desc v-model="desc"></input-desc>
             <input-imp v-model="importance"></input-imp>
             <input-due v-model="due"></input-due>
+            <div class="add-button">
             <button class="btn btn-primary" @click="addTodo">Add</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -17,7 +23,7 @@ import InputDesc from './InputDesc.vue'
 import InputImp from './InputImp.vue'
 import InputDue from './InputDue.vue'
 
-var TODO_API = 'http://vuejs.crudbot.vivans.net:31230/mongo/rc_api/v1.0/todos'
+var TODO_API = 'http://localhost/mongo/rc_api/v1.0/todos'
 
 export default{
     components:{
@@ -58,5 +64,7 @@ export default{
 </script>
 
 <style scoped>
-
+.add-button{
+    padding-left: 15%;
+}
 </style>
